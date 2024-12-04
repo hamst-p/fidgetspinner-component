@@ -11,13 +11,13 @@ const FidgetSpinner = () => {
     const rect = spinnerRef.current.getBoundingClientRect();
     const center = {
       x: rect.left + rect.width / 2,
-      y: rect.top + rect.height / 2
+      y: rect.top + rect.height / 2,
     };
 
     const clientX = e.clientX || (e.touches && e.touches[0].clientX);
     const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-    
-    return Math.atan2(clientY - center.y, clientX - center.x) * 180 / Math.PI;
+
+    return (Math.atan2(clientY - center.y, clientX - center.x) * 180) / Math.PI;
   };
 
   const handleStart = (e) => {
@@ -29,14 +29,14 @@ const FidgetSpinner = () => {
   const handleMove = (e) => {
     if (!isSpinning) return;
     e.preventDefault();
-    
+
     const currentAngle = getAngle(e);
     let delta = currentAngle - startAngle;
-    
+
     if (delta > 180) delta -= 360;
     if (delta < -180) delta += 360;
 
-    setCurrentRotation(prev => prev + delta);
+    setCurrentRotation((prev) => prev + delta);
     setMomentum(delta);
     setStartAngle(currentAngle);
   };
@@ -47,11 +47,11 @@ const FidgetSpinner = () => {
 
   useEffect(() => {
     let animationId;
-    
+
     const animate = () => {
       if (!isSpinning && Math.abs(momentum) > 0.01) {
-        setMomentum(prev => prev * 0.98);
-        setCurrentRotation(prev => prev + momentum);
+        setMomentum((prev) => prev * 0.98);
+        setCurrentRotation((prev) => prev + momentum);
         animationId = requestAnimationFrame(animate);
       }
     };
@@ -75,47 +75,50 @@ const FidgetSpinner = () => {
   }, [isSpinning, startAngle]);
 
   return (
-    <div className="flex items-center justify-center w-full h-full">
-      <div 
-        ref={spinnerRef} 
-        className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px] select-none"
+    <div className="flex items-center justify-center min-h-screen w-full">
+      <div
+        ref={spinnerRef}
+        className="relative 
+                   w-[90vw] h-[90vw] 
+                   md:w-[500px] md:h-[500px] 
+                   lg:w-[600px] lg:h-[600px] 
+                   select-none"
       >
-        <div 
+        <div
           className="absolute w-full h-full select-none"
           style={{ transform: `rotate(${currentRotation}deg)` }}
         >
-          <img 
-            src="/fidget.png" 
+          <img
+            src="/fidget.png"
             alt="Fidget Spinner"
             className="w-full h-full select-none pointer-events-none"
             draggable="false"
           />
-          {/* Three drag handles for the arms */}
-          <div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-grab select-none"
-            style={{ 
-              top: '5%', 
-              left: '50%', 
+          <div
+            className="absolute w-20 h-20 md:w-24 md:h-24 cursor-grab select-none"
+            style={{
+              top: '5%',
+              left: '50%',
               transform: 'translateX(-50%)',
             }}
             onMouseDown={handleStart}
             onTouchStart={handleStart}
           />
-          <div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-grab select-none"
-            style={{ 
-              bottom: '15%', 
-              left: '15%', 
+          <div
+            className="absolute w-20 h-20 md:w-24 md:h-24 cursor-grab select-none"
+            style={{
+              bottom: '15%',
+              left: '15%',
               transform: 'rotate(120deg)',
             }}
             onMouseDown={handleStart}
             onTouchStart={handleStart}
           />
-          <div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-grab select-none"
-            style={{ 
-              bottom: '15%', 
-              right: '15%', 
+          <div
+            className="absolute w-20 h-20 md:w-24 md:h-24 cursor-grab select-none"
+            style={{
+              bottom: '15%',
+              right: '15%',
               transform: 'rotate(-120deg)',
             }}
             onMouseDown={handleStart}
