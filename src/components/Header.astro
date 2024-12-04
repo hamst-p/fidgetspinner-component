@@ -1,7 +1,7 @@
 ---
 const navItems = [
   { href: 'https://x.com/spinnerxrp', icon: '/x-logo.svg', alt: 'X Logo', target: '_blank' },
-  { href: 'https://firstledger.net', text: 'Buy Token' },
+  { href: 'https://firstledger.net', text: 'Buy Token', target: '_blank' },
 ];
 ---
 
@@ -22,7 +22,6 @@ const navItems = [
               alt="Logo"
               class="w-6 h-6 mr-0 animate-spin"
             />
-            
           </a>
           <button
             id="menu-toggle"
@@ -55,10 +54,10 @@ const navItems = [
         <!-- ナビゲーションメニュー -->
         <nav
           id="menu"
-          class="hidden flex-col flex-grow py-12 md:py-0 md:flex md:items-center md:justify-end md:flex-row"
+          class="hidden flex-grow py-12 md:py-0 md:flex md:items-center md:justify-end flex justify-center"
         >
           <ul
-            class="flex space-x-3 text-xs text-zinc-500 items-center"
+            class="flex flex-row space-x-3 text-xs text-zinc-500 items-center justify-center"
           >
             {navItems.map(item => (
               <li>
@@ -71,12 +70,14 @@ const navItems = [
                     <img
                       src={item.icon}
                       alt={item.alt}
-                      class="w-6 h-6"
+                      class="w-5 h-5"
                     />
                   </a>
                 ) : (
                   <a
                     href={item.href}
+                    target={item.target}
+                    rel="noopener noreferrer"
                     class="py-2 w-auto px-4 border-2 h-8 focus:ring-2 rounded-full border-black bg-black/5 hover:bg-transparent text-black duration-200 focus:ring-offset-2 hover:text-black inline-flex items-center justify-center ring-2 focus:ring-black ring-transparent"
                   >
                     {item.text}
