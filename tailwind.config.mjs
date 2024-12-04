@@ -4,7 +4,7 @@ export default {
 	theme: {
 	  extend: {
 		fontFamily: {
-			sans: ['"Work Sans"', 'sans-serif'], // デフォルトのフォントをWork Sansに設定
+			sans: ['"Work Sans"', 'sans-serif'], 
 		  },
 	  },
 	},
