@@ -1,42 +1,95 @@
 ---
 const navItems = [
-  { href: '/token', text: 'Buy Token' },
-  { href: 'https://x.com/spinnerxrp', text: 'X', target: '_blank' }
+  { href: 'https://x.com/spinnerxrp', icon: '/x-logo.svg', alt: 'X Logo', target: '_blank' },
+  { href: 'https://firstledger.net', text: 'Buy Token' },
 ];
 ---
 
-<header class="bg-white shadow-sm h-16 flex items-center">
-  <div class="container mx-auto px-4">
-    <nav class="flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <img 
-          src="/fidget.svg" 
-          alt="Spinner XRP Logo" 
-          class="w-8 h-8"
-          style={{
-            animation: 'spin 3s linear infinite',
-          }}
-        />
-        <div class="text-xl font-bold text-gray-800">
-          Spinner XRP
-        </div>
-      </div>
-      <ul class="flex space-x-6">
-        {navItems.map(item => (
-          <li>
-            <a 
-              href={item.href} 
-              target={item.target}
-              class="text-gray-600 hover:text-gray-900 transition-colors"
+<div class="fixed top-4 inset-x-0 z-50">
+  <div class="max-w-2xl mx-auto px-8">
+    <div class="w-full mx-auto">
+      <div
+        class="relative flex flex-col w-full p-3 mx-auto bg-white ring-1 uppercase ring-zinc-200 backdrop-blur-xl backdrop-filter rounded-xl md:rounded-full md:items-center md:justify-between md:flex-row"
+      >
+        <!-- ロゴとハンバーガーメニュー -->
+        <div class="flex flex-row items-center justify-between md:justify-start">
+          <a
+            class="text-black hover:text-black/50 gap-4 items-center tracking-tighter inline-flex font-bold ml-2 text-xl"
+            href="/" title="link to main page"
+          >
+            <img
+              src="/fidget.svg"
+              alt="Logo"
+              class="w-6 h-6 mr-0 animate-spin"
+            />
+            Spinner XRP
+          </a>
+          <button
+            id="menu-toggle"
+            class="inline-flex items-center justify-center p-2 text-zinc-400 hover:text-cyan-300 focus:outline-none focus:text-black md:hidden"
+          >
+            <svg
+              class="w-6 h-6"
+              stroke="currentColor"
+              fill="none"
+              viewBox="0 0 24 24"
             >
-              {item.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+              <path
+                class="menu-icon-open"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+              <path
+                class="menu-icon-close hidden"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- ナビゲーションメニュー -->
+        <nav
+          id="menu"
+          class="hidden flex-col flex-grow py-12 md:py-0 md:flex md:items-center md:justify-end md:flex-row"
+        >
+          <ul
+            class="flex space-x-3 text-xs text-zinc-500 items-center"
+          >
+            {navItems.map(item => (
+              <li>
+                {item.icon ? (
+                  <a
+                    href={item.href}
+                    target={item.target}
+                    class="shrink-0 hover:opacity-80 transition-opacity"
+                  >
+                    <img
+                      src={item.icon}
+                      alt={item.alt}
+                      class="w-6 h-6"
+                    />
+                  </a>
+                ) : (
+                  <a
+                    href={item.href}
+                    class="py-2 w-auto px-4 border-2 h-8 focus:ring-2 rounded-full border-black bg-black/5 hover:bg-transparent text-black duration-200 focus:ring-offset-2 hover:text-black inline-flex items-center justify-center ring-2 focus:ring-black ring-transparent"
+                  >
+                    {item.text}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </div>
   </div>
-</header>
+</div>
 
 <style>
   @keyframes spin {
@@ -47,4 +100,21 @@ const navItems = [
       transform: rotate(360deg);
     }
   }
+
+  .animate-spin {
+    animation: spin 3s linear infinite;
+  }
 </style>
+
+<script>
+  const menuToggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("menu");
+  const openIcon = document.querySelector(".menu-icon-open");
+  const closeIcon = document.querySelector(".menu-icon-close");
+
+  menuToggle.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+    openIcon.classList.toggle("hidden");
+    closeIcon.classList.toggle("hidden");
+  });
+</script>

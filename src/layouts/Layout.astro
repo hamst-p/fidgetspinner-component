@@ -12,19 +12,27 @@ const { title } = Astro.props;
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="flex flex-col h-screen overflow-hidden">
+  <body class="flex flex-col h-[var(--app-height)] overflow-hidden">
     <Header />
-    <main class="flex-grow bg-gradient-to-b from-slate-50 to-slate-100 overflow-hidden">
+    <main class="flex-grow bg-gradient-to-b from-slate-50 to-slate-100">
       <slot />
     </main>
-    <Footer />
+    <Footer class="h-16 bg-slate-800 text-white flex items-center justify-center" />
+    <script>
+      // Safariで正しい高さを設定
+      const setAppHeight = () => {
+        document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
+      };
+      window.addEventListener('resize', setAppHeight);
+      setAppHeight();
+    </script>
   </body>
 </html>
 
@@ -33,7 +41,7 @@ const { title } = Astro.props;
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden;
+    overflow: hidden; /* スクロールを完全に防止 */
   }
   * {
     box-sizing: border-box;
