@@ -76,20 +76,23 @@ const FidgetSpinner = () => {
 
   return (
     <div className="flex items-center justify-center w-full h-full">
-      <div ref={spinnerRef} className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px]">
+      <div 
+        ref={spinnerRef} 
+        className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px] select-none"
+      >
         <div 
-          className="absolute w-full h-full"
+          className="absolute w-full h-full select-none"
           style={{ transform: `rotate(${currentRotation}deg)` }}
         >
           <img 
             src="/fidget.png" 
             alt="Fidget Spinner"
-            className="w-full h-full select-none"
+            className="w-full h-full select-none pointer-events-none"
             draggable="false"
           />
           {/* Three drag handles for the arms */}
           <div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-grab select-none"
             style={{ 
               top: '5%', 
               left: '50%', 
@@ -99,7 +102,7 @@ const FidgetSpinner = () => {
             onTouchStart={handleStart}
           />
           <div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-grab select-none"
             style={{ 
               bottom: '15%', 
               left: '15%', 
@@ -109,7 +112,7 @@ const FidgetSpinner = () => {
             onTouchStart={handleStart}
           />
           <div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-grab select-none"
             style={{ 
               bottom: '15%', 
               right: '15%', 

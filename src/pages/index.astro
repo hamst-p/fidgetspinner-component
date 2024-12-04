@@ -3,8 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import FidgetSpinner from '../components/FidgetSpinner';
 ---
 
-<Layout title="Fidget Spinner">
-  <main class="w-screen h-screen overflow-hidden bg-transparent">
-    <FidgetSpinner client:load />
-  </main>
+<Layout title="Fidget Spinner - Interactive Demo">
+  <div class="h-full flex flex-col">
+
+    
+    <div class="flex-grow flex justify-center items-center">
+      <FidgetSpinner client:load />
+    </div>
+  </div>
 </Layout>

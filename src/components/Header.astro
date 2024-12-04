@@ -1,0 +1,50 @@
+---
+const navItems = [
+  { href: '/token', text: 'Buy Token' },
+  { href: 'https://x.com/spinnerxrp', text: 'X', target: '_blank' }
+];
+---
+
+<header class="bg-white shadow-sm h-16 flex items-center">
+  <div class="container mx-auto px-4">
+    <nav class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <img 
+          src="/fidget.svg" 
+          alt="Spinner XRP Logo" 
+          class="w-8 h-8"
+          style={{
+            animation: 'spin 3s linear infinite',
+          }}
+        />
+        <div class="text-xl font-bold text-gray-800">
+          Spinner XRP
+        </div>
+      </div>
+      <ul class="flex space-x-6">
+        {navItems.map(item => (
+          <li>
+            <a 
+              href={item.href} 
+              target={item.target}
+              class="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              {item.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
